@@ -1,0 +1,33 @@
+import shutil
+from datetime import datetime
+
+# Server disk usage monitor
+
+path = "/"
+
+total, used, free = shutil.disk_usage(path)
+
+total_gb = total / (1024 ** 3)
+used_gb = used / (1024 ** 3)
+free_gb = free / (1024 ** 3)
+
+usage_percent = (used / total) * 100
+
+print("====================================")
+print("       SERVER DISK MONITOR")
+print("====================================")
+print("Date & Time :", datetime.now())
+print("Mount Point:", path)
+print(f"Total Space: {total_gb:.2f} GB")
+print(f"Used Space : {used_gb:.2f} GB")
+print(f"Free Space : {free_gb:.2f} GB")
+print(f"Usage      : {usage_percent:.2f}%")
+
+if usage_percent >= 90:
+    print("STATUS     : CRITICAL - Disk usage is high!")
+elif usage_percent >= 80:
+    print("STATUS     : WARNING - Disk usage is increasing!")
+else:
+    print("STATUS     : HEALTHY - Disk usage is normal.")
+
+print("====================================")
